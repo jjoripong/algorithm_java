@@ -1,7 +1,6 @@
 /**
  * 2021.03.21
  * @author Joy
- * 01-2 ¹Ýº¹¹® (~38p)
  */
 
 
@@ -11,19 +10,19 @@ public class Q11 {
 	public static void q11() {
 		Scanner stdIn = new Scanner(System.in);
 		
-		System.out.print("¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ: ");
+		System.out.print("ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½: ");
 		
 		Long n = stdIn.nextLong();
 
 		while (n <= 0) {
-			System.out.println("0º¸´Ù Å«°ªÀ» ÀÔ·ÂÇÏ¼¼¿ä!");
+			System.out.println("0ï¿½ï¿½ï¿½ï¿½ Å«ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½!");
 			n = stdIn.nextLong();
 		}
 		
 		stdIn.close();
 		
 		String sn = Long.toString(n);
-		System.out.println("±× ¼ö´Â " + sn.length() + "ÀÚ¸®ÀÔ´Ï´Ù.");
+		System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ " + sn.length() + "ï¿½Ú¸ï¿½ï¿½Ô´Ï´ï¿½.");
 	}
 	
 	public static void main(String args[]) {
