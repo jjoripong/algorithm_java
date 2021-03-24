@@ -1,7 +1,6 @@
 /**
  * 2021.03.20
  * @author Joy
- * 01-1 ¾Ë°í¸®ÁòÀÌ¶õ? (~25p)
  */
 
 public class Q4 {
@@ -19,18 +18,18 @@ public class Q4 {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("med3(3,2,1) = " + med3(3, 2, 1)); // a£¾b£¾c
-		System.out.println("med3(3,2,2) = " + med3(3, 2, 2)); // a£¾b£½c
-		System.out.println("med3(3,1,2) = " + med3(3, 1, 2)); // a£¾c£¾b
-		System.out.println("med3(3,2,3) = " + med3(3, 2, 3)); // a£½c£¾b
-		System.out.println("med3(2,1,3) = " + med3(2, 1, 3)); // c£¾a£¾b
-		System.out.println("med3(3,3,2) = " + med3(3, 3, 2)); // a£½b£¾c
-		System.out.println("med3(3,3,3) = " + med3(3, 3, 3)); // a£½b£½c
-		System.out.println("med3(2,2,3) = " + med3(2, 2, 3)); // c£¾a£½b
-		System.out.println("med3(2,3,1) = " + med3(2, 3, 1)); // b£¾a£¾c
-		System.out.println("med3(2,3,2) = " + med3(2, 3, 2)); // b£¾a£½c
-		System.out.println("med3(1,3,2) = " + med3(1, 3, 2)); // b£¾c£¾a
-		System.out.println("med3(2,3,3) = " + med3(2, 3, 3)); // b£½c£¾a
-		System.out.println("med3(1,2,3) = " + med3(1, 2, 3)); // c£¾b£¾a
+		System.out.println("med3(3,2,1) = " + med3(3, 2, 1)); // aï¿½ï¿½bï¿½ï¿½c
+		System.out.println("med3(3,2,2) = " + med3(3, 2, 2)); // aï¿½ï¿½bï¿½ï¿½c
+		System.out.println("med3(3,1,2) = " + med3(3, 1, 2)); // aï¿½ï¿½cï¿½ï¿½b
+		System.out.println("med3(3,2,3) = " + med3(3, 2, 3)); // aï¿½ï¿½cï¿½ï¿½b
+		System.out.println("med3(2,1,3) = " + med3(2, 1, 3)); // cï¿½ï¿½aï¿½ï¿½b
+		System.out.println("med3(3,3,2) = " + med3(3, 3, 2)); // aï¿½ï¿½bï¿½ï¿½c
+		System.out.println("med3(3,3,3) = " + med3(3, 3, 3)); // aï¿½ï¿½bï¿½ï¿½c
+		System.out.println("med3(2,2,3) = " + med3(2, 2, 3)); // cï¿½ï¿½aï¿½ï¿½b
+		System.out.println("med3(2,3,1) = " + med3(2, 3, 1)); // bï¿½ï¿½aï¿½ï¿½c
+		System.out.println("med3(2,3,2) = " + med3(2, 3, 2)); // bï¿½ï¿½aï¿½ï¿½c
+		System.out.println("med3(1,3,2) = " + med3(1, 3, 2)); // bï¿½ï¿½cï¿½ï¿½a
+		System.out.println("med3(2,3,3) = " + med3(2, 3, 3)); // bï¿½ï¿½cï¿½ï¿½a
+		System.out.println("med3(1,2,3) = " + med3(1, 2, 3)); // cï¿½ï¿½bï¿½ï¿½a
 	}
 }

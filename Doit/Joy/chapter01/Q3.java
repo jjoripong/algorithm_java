@@ -1,7 +1,6 @@
 /**
  * 2021.03.20
  * @author Joy
- * 01-1 알고리즘이란? (~25p)
  */
 
 public class Q3 {
