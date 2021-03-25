@@ -1,4 +1,4 @@
-//1부터 n까지의 합에서 i
+ //1 + 2 + 3 + 4 + 5 + 6 + 7 = 28 출력
 public static void main(String[] args) {
     Scanner stdIn = new Scanner(System.in);
 
@@ -7,13 +7,12 @@ public static void main(String[] args) {
     int n = stdIn.nextInt();
 
     int sum = 0;
-    int i = 1;
-
-    while (i <= n){
+    for (int i = 1; i <= n; i++){
         sum += i;
-        i ++;
+        if(i == 1)
+            System.out.print(i);
+        else
+            System.out.print(" + " +i);
     }
-    System.out.println("1부터 "+n+"까지의 합은 "+sum+"입니다.");
-    System.out.println("i의 값은 : "+i);
-    //i = n + 1
+    System.out.print(" = " + sum);
 }
