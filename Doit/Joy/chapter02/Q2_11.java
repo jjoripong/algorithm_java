@@ -16,14 +16,42 @@ public class YMD {
 	
 	// 날짜로부터 n일 후 날짜 반환
 	YMD after(int n) {
-		YMD ymd = new YMD(y, m, d);
-		
-		int md = mdays[isLeap(y)][m];
+        YMD rtYmd = new YMD(y, m, d);
+        //this : 입력 받은 값
+        this.d += n;
+
+        // 입력받은 d가 365일보다 크면 그해 일 수 로 나눠 주기
+        int year = 365 + isLeap(this.y);
+        while (this.d > year) {
+            rtYmd.y += this.d / year;
+            this.d = this.d % year;
+        }
+        // 입력받은 d가 m의 일 수보다 크면 12로 나눠 주기
+        while (this.d > mdays[isLeap(this.y)][this.m-1]) {
+            rtYmd.m += this.d / mdays[isLeap(this.y)][this.m-1];
+            this.d = this.d % mdays[isLeap(this.y)][this.m-1];
+        }
+        rtYmd.d = this.d;
+
+        return rtYmd;
 	}
 	
 	// 날짜로부터 n일 전 날짜 반환
 	YMD before(int n) {
-		
+		YMD temp = new YMD(this.y, this.m, this.d);
+        if (n < 0)
+            return (after(-n));
+
+        temp.d -= n;
+
+        while (temp.d < 1) {
+            if (--temp.m < 1) {
+                temp.y--;
+                temp.m = 12;
+            }
+            temp.d += mdays[isLeap(temp.y)][temp.m - 1];
+        }
+        return temp;
 	}
 	
 	// 2월 평년 28, 윤년 29
