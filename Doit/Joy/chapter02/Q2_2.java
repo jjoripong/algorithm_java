@@ -24,6 +24,8 @@ public class Q2_2 {
         }
     }
 
+    // Rand 는 0~n-1 까지 수 생성    
+    //범위를 n 까지 하고 싶으면 +1 해줘야 한다
 	public static void main(String args[]) {
         Random rand = new Random();
         int itemNum = rand.nextInt(20);
