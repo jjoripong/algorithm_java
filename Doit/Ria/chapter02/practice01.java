@@ -5,7 +5,7 @@ public class practice01 {
     static int maxOf(int[] a){
         int max = a[0];
 
-        for(int index =0; index < a.length; index++){
+        for(int index =1; index < a.length; index++){
             if (a[index]> max)
                 max = a[index];
         }
