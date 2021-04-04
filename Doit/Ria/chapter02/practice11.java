@@ -11,56 +11,88 @@ public class practice11 {
             this.d = day;
         }
 
-        YMD after(int n){
-        	YMD aTime = new YMD(this.y,this.m,this.d);
-        	int year = aTime.y;
-        	aTime.y = y-(n/365);
-        	int remDate = (n%365);
-        	while(aTime.d - remDate <=0){
-        		aTime.m--;
-        		if(aTime.m == 0) {
-        			aTime.m = 12;
-        			year--;
-        		}
-        		remDate = (aTime.d - remDate)*-1;
-        		aTime.d = mdays[isLeap(year)][aTime.m-1];
-        	}        	
-        	aTime.d -= remDate;
-        	return aTime;
+        //이거 defore 임......
+        // YMD after(int n){
+        // 	YMD aTime = new YMD(this.y,this.m,this.d);
+        // 	int year = aTime.y;
+        // 	aTime.y = y-(n/365);
+        // 	int remDate = (n%365);
+        // 	while(aTime.d - remDate <=0){
+        // 		aTime.m--;
+        // 		if(aTime.m == 0) {
+        // 			aTime.m = 12;
+        // 			year--;
+        // 		}
+        // 		remDate = (aTime.d - remDate)*-1;
+        // 		aTime.d = mdays[isLeap(year)][aTime.m-1];
+        // 	}        	
+        // 	aTime.d -= remDate;
+        // 	return aTime;
+        // }
+
+         YMD before(int n){
+           YMD bTime = new YMD(this.y,this.m,this.d);
+
+           bTime.d -= n;
+
+           while(bTime.d < 1){
+               if(-- bTime.m < 1){
+                   bTime.y--;
+                   bTime.m = 12;
+               }
+               temp.d += mdays[isLeap(bTime.y)][bTime.m-1];
+           }
+           return bTime;
         }
 
-		
-		 YMD before(int n){
-			 YMD bTime = new YMD(this.y,this.m,this.d);
-			 int year = bTime.y;
-			 int day = bTime.d;
-			 bTime.y = y+(n/365);
-			 int remDate = n; //3
+		//이거 after 임......
+		//  YMD before(int n){
+		// 	 YMD bTime = new YMD(this.y,this.m,this.d);
+		// 	 int year = bTime.y;
+		// 	 int day = bTime.d;
+		// 	 bTime.y = y+(n/365);
+		// 	 int remDate = n; //3
 			 
-			 while(day+remDate > mdays[isLeap(year)][bTime.m-1]){
-				//day = 31
-				//if(day+remDate > mdays[isLeap(year)][bTime.m-1]) {
-				 //System.out.println("remDate : "+remDate);
-				if(mdays[isLeap(year)][bTime.m-1]== remDate) {
-					 remDate = 0;
-				}else {
-					remDate -= (mdays[isLeap(year)][bTime.m-1]-day-1 < 0)? 1:mdays[isLeap(year)][bTime.m-1]-day-1;
-				}
-				//System.out.println("remDate : "+remDate);
-					bTime.m++;
-					if(bTime.m == 12) {
-						bTime.m = 1;
-						year++;
-					}
-					day = 1;
-				//}
-			 };
-			 //System.out.println("day : "+day);
-			 //System.out.println("remDate ff: "+remDate);
-			 bTime.d = day+remDate;
-			 //System.out.println("bTime.d : "+bTime.d);
-			 return bTime;
-		 }
+		// 	 while(day+remDate > mdays[isLeap(year)][bTime.m-1]){
+		// 		//day = 31
+		// 		//if(day+remDate > mdays[isLeap(year)][bTime.m-1]) {
+		// 		 //System.out.println("remDate : "+remDate);
+		// 		if(mdays[isLeap(year)][bTime.m-1]== remDate) {
+		// 			 remDate = 0;
+		// 		}else {
+		// 			remDate -= (mdays[isLeap(year)][bTime.m-1]-day-1 < 0)? 1:mdays[isLeap(year)][bTime.m-1]-day-1;
+		// 		}
+		// 		//System.out.println("remDate : "+remDate);
+		// 			bTime.m++;
+		// 			if(bTime.m == 12) {
+		// 				bTime.m = 1;
+		// 				year++;
+		// 			}
+		// 			day = 1;
+		// 		//}
+		// 	 };
+		// 	 //System.out.println("day : "+day);
+		// 	 //System.out.println("remDate ff: "+remDate);
+		// 	 bTime.d = day+remDate;
+		// 	 //System.out.println("bTime.d : "+bTime.d);
+		// 	 return bTime;
+		//  }
+
+
+        YMD after(int n){
+           YMD aTime = new YMD(this.y,this.m,this.d);
+
+           aTime.d += n;
+
+           while(aTime.d > mdays[isLeap(aTime.y)][aTime.m-1]){
+               aTime.d -= mdays[isLeap(aTime.y)][aTime.m-1];
+               if(++aTime.m > 12){
+                   aTime.y++;
+                   aTime.m = 1;
+               }
+           }
+           return aTime;
+        }
 		 
     }
 
