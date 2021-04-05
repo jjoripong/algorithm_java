@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class practice01 {
+public class practice06 {
     static int[] randArray(int num){
         Random rand = new Random();
 
