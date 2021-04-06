@@ -38,6 +38,7 @@ public class practice07 {
                 new PhyscData("유지훈", 168, 0.4),
                 new PhyscData("이나령", 162, 0.3)
         };
+        
         System.out.print("시력이 몇 인 사람을 찾고 있나요?：");
         double vision = stdIn.nextDouble();
         int idx = Arrays.binarySearch(x,new PhyscData("", 0, vision),PhyscData.VISION_ORDER);
