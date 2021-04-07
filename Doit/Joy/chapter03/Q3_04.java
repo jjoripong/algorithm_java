@@ -20,12 +20,21 @@ public class Q3_04 {
 		// 이진 탐색
 		do {
 			int m = (f+l)/2;
-			//  m|  <- : k, + : m, ->: 1
+
+			// 화살표 출력 m|  <- : k, + : m, ->: 1
 			System.out.printf("\n   |");
-			System.out.printf(String.format("%%%ds<-", 4*f+1),"");
-			System.out.printf(" + ");
-			System.out.printf(String.format("%%%ds->", 4*l-1),"");
-			System.out.printf("\n  %d|", m);
+			if (f != m)
+				System.out.printf(String.format("%%%ds<-%%%ds", 4*f+1, 4*(m-f)),"", "");
+			else
+				System.out.printf(String.format("%%%ds<-+", 4*f+1),"");
+			if (l != m)
+				System.out.printf(String.format("%%%ds->", 4*(l-m) -2),"");
+			else 
+				System.out.printf("->\n");
+			System.out.printf("%d|", m);
+		
+
+			// 숫자 출력
 			for (int j=0; j < n; j++) {
 				System.out.printf(" %d ", a[j]);
 			}
