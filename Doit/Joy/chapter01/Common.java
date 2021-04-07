@@ -5,7 +5,7 @@ public abstract class Common {
 	public static int inputNumber() {
 		Scanner stdIn = new Scanner(System.in);
 		
-		System.out.print("¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ: ");
+		System.out.print("ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
 		int n = stdIn.nextInt();
 		stdIn.close();
 		return n;
