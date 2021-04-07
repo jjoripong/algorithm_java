@@ -2,7 +2,6 @@
 /**
  * 2021.03.21
  * @author Joy
- * 01-2 ¹Ýº¹¹® (~38p)
  */
 
 public class Q10 extends Common{
@@ -12,7 +11,7 @@ public class Q10 extends Common{
 		int b = inputNumber();
 		
 		while (b <= a) {
-			System.out.println("aº¸´Ù Å«°ªÀ» ÀÔ·ÂÇÏ¼¼¿©!");
+			System.out.println("aë³´ë‹¤ í°ìˆ˜ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”!");
 			b = inputNumber();
 		};
 		System.out.println(b+ "-" + a + "=" + (b-a));
