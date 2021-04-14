@@ -1,20 +1,16 @@
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
-public class practice01 {
+public class practice07 {
 
     public static class IntDeque {
         private int max;			// 큐의 용량
-        private int frontA;			// 첫 번째 요소 커서
-        private int rearA;			// 마지막 요소 커서
-        private int frontB;			// 첫 번째 요소 커서
-        private int rearB;			// 마지막 요소 커서 -- 여기까지함
+        //private int front;			// 첫 번째 요소 커서
+        //private int rear;			// 마지막 요소 커서
+        //private int frontB;			// 첫 번째 요소 커서
+        //private int rearB;			// 마지막 요소 커서
         private int num;			// 현재 데이터 수
         private int[] que;			// 큐 본체
 
-
-//num이 필요한가? rearA == 0 rearB == 0 // rearA == rearB 
         // 실행 시 예외：큐가 비어 있음
         public class EmptyIntDequeException extends RuntimeException {
             public EmptyIntDequeException() { }
@@ -27,7 +23,7 @@ public class practice01 {
 
         // 생성자
         public IntDeque(int capacity) {
-            num = front = rear = 0;
+            num = 0;
             max = capacity;
             try {
                 que = new int[max];				// 큐 본체용 배열을  생성
@@ -37,47 +33,62 @@ public class practice01 {
         }
 
         // 큐에 데이터를 인큐
-        public int enque(int x) throws OverflowIntDequeException {
+        public int enqueFront(int x) throws OverflowIntDequeException {
             if (num >= max)
                 throw new OverflowIntDequeException();			// 큐가 가득 참
-            que[rear++] = x;
+            for(int idx = 0; idx < num; idx++)
+                que[idx+1] = que[idx];
+            que[0] = x;
             num++;
-            if (rear == max)
-                rear = 0;
+            return x;
+        }
+        public int enqueRear(int x) throws OverflowIntDequeException {
+            if (num >= max)
+                throw new OverflowIntDequeException();			// 큐가 가득 참
+            que[num++] = x;
             return x;
         }
 
         // 큐에서 데이터를 디큐
-        public int deque() throws EmptyIntDequeException {
+        public int dequeFront() throws EmptyIntDequeException {
+            if (num <= 0)// 큐이 비어 있음
+                throw new EmptyIntDequeException();
+            int x = que[0];
+            for(int idx = 0; idx < num-1; idx++)
+                que[idx] = que[idx+1];
+            num--;
+            return x;
+        }
+        public int dequeRear() throws EmptyIntDequeException {
             if (num <= 0)
                 throw new EmptyIntDequeException();				// 큐가 비어 있음
-            int x = que[front++];
-            num--;
-            if (front == max)
-                front = 0;
+            int x = que[num--];
             return x;
         }
 
         // 큐에서 데이터를 피크 (프런트 데이터를 들여다봄)
-        public int peek() throws EmptyIntDequeException {
+        public int peekFront() throws EmptyIntDequeException {
             if (num <= 0)
                 throw new EmptyIntDequeException();				// 큐가 비어 있음
-            return que[front];
+            return que[0];
+        }
+        public int peekRear() throws EmptyIntDequeException {
+            if (num <= 0)
+                throw new EmptyIntDequeException();				// 큐가 비어 있음
+            return que[num-1];
         }
 
         // 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환
         public int indexOf(int x) {
-            for (int i = 0; i < num; i++) {
-                int idx = (i + front) % max;
-                if (que[idx] == x)								// 검색 성공
-                    return idx;
-            }
-            return -1;											// 검색 실패
+        	 for (int i = 0; i < num; i++)                // 정상 쪽에서 선형 검색
+                 if (que[i] == x)
+                     return i;                                // 검색 성공
+             return -1;										// 검색 실패
         }
 
         // 큐를 비움
         public void clear() {
-            num = front = rear = 0;
+            num = 0;
         }
 
         // 큐의 용량을 반환
@@ -102,23 +113,13 @@ public class practice01 {
 
         // 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력
         public void dump() {
-            if (num <= 0)
-                System.out.println("큐가 비어 있습니다.");
+        	if (num <= 0)
+                System.out.println("큐이 비어 있습니다.");
             else {
                 for (int i = 0; i < num; i++)
-                    System.out.print(que[(i + front) % max] + " ");
+                    System.out.print(que[i] + " ");
                 System.out.println();
             }
-        }
-
-        // 큐에서 x를 검색하여 위치(찾지 못하면 0)를 반환
-        public int search(int x) {
-            for (int i = 0; i < num; i++) {
-                int idx = (i + front) % max;
-                if (que[idx] == x)								// 검색 성공
-                    return i+1;
-            }
-            return 0;											// 검색 실패
         }
     };
 
@@ -129,7 +130,7 @@ public class practice01 {
 
         while (true) {
             System.out.println("\n현재 데이터 수：" + s.size() + " / "+ s.capacity());
-            System.out.print("(1)enqueue  (2)dequeue  (3)peek  (4)dump　\n(5)search  (6)clear  (7)몇번째? (0)end\n번호 :");
+            System.out.print("(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  \n(7)dump　(8)search  (9)clear  (0)end\n번호 :");
 
             int menu = stdIn.nextInt();
             if (menu == 0) break;
@@ -137,14 +138,13 @@ public class practice01 {
             int x;
             switch (menu) {
                 case 1:// enqueue
-
                     System.out.print("데이터：");
                     x = stdIn.nextInt();
                     if(s.isFull()){
                         System.out.println("큐가 가득 찼습니다.");
                         break;
                     }
-                    s.enque(x);
+                    s.enqueFront(x);
                     break;
 
                 case 2:// dequeue
@@ -152,7 +152,7 @@ public class practice01 {
                         System.out.println("큐가 비어 있습니다.");
                         break;
                     }
-                    x = s.deque();
+                    x = s.dequeFront();
                     System.out.println("팝한 데이터는 " + x + "입니다.");
                     break;
 
@@ -161,14 +161,42 @@ public class practice01 {
                         System.out.println("큐가 비어 있습니다.");
                         break;
                     }
-                    x = s.peek();
+                    x = s.peekFront();
                     System.out.println("피크한 데이터는 " + x + "입니다.");
                     break;
+                    
+                case 4:// enqueue
+                    System.out.print("데이터：");
+                    x = stdIn.nextInt();
+                    if(s.isFull()){
+                        System.out.println("큐가 가득 찼습니다.");
+                        break;
+                    }
+                    s.enqueRear(x);
+                    break;
 
-                case 4:// 덤프
+                case 5:// dequeue
+                    if(s.isEmpty()){
+                        System.out.println("큐가 비어 있습니다.");
+                        break;
+                    }
+                    x = s.dequeRear();
+                    System.out.println("팝한 데이터는 " + x + "입니다.");
+                    break;
+
+                case 6:// 피크
+                    if(s.isEmpty()){
+                        System.out.println("큐가 비어 있습니다.");
+                        break;
+                    }
+                    x = s.peekRear();
+                    System.out.println("피크한 데이터는 " + x + "입니다.");
+                    break;                    
+
+                case 7:// 덤프
                     s.dump();
                     break;
-                case 5:// 검색
+                case 8:// 검색
                     if(s.isEmpty()){
                         System.out.println("큐가 비어 있습니다.");
                         break;
@@ -181,21 +209,8 @@ public class practice01 {
                     else
                         System.out.println("검색한 데이터는 " + idx + "에 위치합니다.");
                     break;
-                case 6:// 비우기
+                case 9:// 비우기
                     s.clear();
-                    break;
-                case 7:// 몇번째?
-                    if(s.isEmpty()){
-                        System.out.println("큐가 비어 있습니다.");
-                        break;
-                    }
-                    System.out.print("검색할 데이터：");
-                    x = stdIn.nextInt();
-                    int location = s.search(x);
-                    if(location == 0)
-                        System.out.println("값이 존재하지 않습니다.");
-                    else
-                            System.out.println("검색한 데이터는 " + location + "번째!");
                     break;
             }
         }
@@ -205,5 +220,62 @@ public class practice01 {
 
 /*
 print:
+현재 데이터 수：0 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :1
+데이터：1
 
+현재 데이터 수：1 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :1
+데이터：2
+
+현재 데이터 수：2 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :4
+데이터：4
+
+현재 데이터 수：3 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :4
+데이터：5
+
+현재 데이터 수：4 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :7
+2 1 4 5 
+
+현재 데이터 수：4 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :3
+피크한 데이터는 2입니다.
+
+현재 데이터 수：4 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :6
+피크한 데이터는 5입니다.
+
+현재 데이터 수：4 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :2
+팝한 데이터는 2입니다.
+
+현재 데이터 수：3 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :5
+팝한 데이터는 5입니다.
+
+현재 데이터 수：2 / 64
+(1)enqueue맨 앞  (2)dequeue맨 앞  (3)peek맨 앞  (4)enqueue맨 뒤  (5)dequeue맨 뒤  (6)peek맨 뒤  
+(7)dump　(8)search  (9)clear  (0)end
+번호 :9
 */
