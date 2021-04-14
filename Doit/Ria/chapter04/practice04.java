@@ -56,7 +56,7 @@ public class practice04 {
 
         // 큐에서 x를 찾아 인덱스(없으면 –1)를 반환
         public int indexOf(int x) {
-            for (int i = num - 1; i >= 0; i--)                // 정상 쪽에서 선형 검색
+            for (int i = 0; i < num; i++)                // 정상 쪽에서 선형 검색
                 if (que[i] == x)
                     return i;                                // 검색 성공
             return -1;                                        // 검색 실패
