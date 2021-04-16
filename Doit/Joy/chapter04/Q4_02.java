@@ -81,7 +81,7 @@ public class Gstack<T> {
     public void dump() {
         if (ptr <= 0)
             System.out.println("스택이 비어 있습니다.");
-        else {ㄴ
+        else {
         	System.out.print("데이터: ");
             for (int i=0; i< ptr; i++)
                 System.out.print(stk[i] + " ");

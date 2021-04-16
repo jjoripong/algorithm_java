@@ -6,6 +6,9 @@ public class TwoInOneStack {
 	 * a              b
 	 * [0][][][][a-1][a]...[b-1]
 	 *            ^   ^
+	 *           pop pop
+	 * a: 0 ~a-1  / aMax : a-1
+	 * b: b-1 ~ a / bMax : a
 	 */
 	
 	private int aMax, bMax;
@@ -21,7 +24,7 @@ public class TwoInOneStack {
 		aPtr = 0;
 		aMax = aCapacity;
 		bMax = aCapacity + bCapacity;
-		bPtr = aCapacity;
+		bPtr = bMax-1;
 		
 		try {
 			stk = new int[aMax+bMax];	// 스택 생성
@@ -52,7 +55,7 @@ public class TwoInOneStack {
 					throw new OverflowIntStackException();
 				return stk[aPtr++] = x;
 			case StackB: 
-				if (bPtr >= bMax) 
+				if (bPtr >= aMax) 
 					throw new OverflowIntStackException();
 				return stk[bPtr++] = x;	
 			default: 
@@ -67,9 +70,9 @@ public class TwoInOneStack {
 					throw new EmptyIntStackException();
 				return stk[--aPtr];
 			case StackB: 
-				if (bPtr <= aMax) 
+				if (bPtr <= bMax) 
 					throw new EmptyIntStackException();
-				return stk[--bPtr];
+				return stk[++bPtr];
 			default: 
 				throw new IllegalArgumentException("Unexpected Type: " + t);
 		}
@@ -83,7 +86,7 @@ public class TwoInOneStack {
 					throw new EmptyIntStackException();
 				return stk[aPtr-1];
 			case StackB: 
-				if (bPtr <= aMax) 
+				if (bPtr <= bMax) 
 					throw new EmptyIntStackException();
 				return stk[bPtr-1];
 			default: 
@@ -100,7 +103,7 @@ public class TwoInOneStack {
 
     public void clear() {
     	aPtr = 0;
-    	bPtr = aMax;
+    	bPtr = bMax-1;
     }
 
     // 스택 용량 반환
