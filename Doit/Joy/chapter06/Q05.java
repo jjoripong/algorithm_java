@@ -29,28 +29,30 @@ public class Q05 {
             System
                 .out
                 .println("x[" + i + "]＝" + x[i]);
-        }
+    }
+
     
     public enum Direction{
         Left,
         Right
     };
+
     static void bubbleSort(int[] a, int n) {
         int comparison = 0;
         int swap = 0;
         Direction d = Direction.Left;
+        int k = 0;
 
-        for (int i = 0; i < n-1; i++) {
-            int exchg = 0;
+        while (k < n - 1) {
+            int last = n - 1;		
             comparison++; 
 
             switch (d) {
             case Left: 
                 System.out.println("<===");
-                for (int j = n-1; j > i; j--) {
+                for (int j = n-1; j > k; j--) {
                     if (a[j-1] > a[j]) {
                         swap(a, j-1, j);
-                        exchg++;
                         swap++;
                     }
                 }
@@ -58,10 +60,9 @@ public class Q05 {
                  break;
             case Right: 
                 System.out.println("===>");
-                    for (int j = 0; j < n-i-1; j++) { 
+                    for (int j = 0; j < n-k-1; j++) { 
                         if (a[j] > a[j+1]) {
                             swap(a, j, j+1);
-                            exchg++;
                             swap++;
                         }
                     }
@@ -70,13 +71,13 @@ public class Q05 {
             default: break;
         } 
 
+            k = last;
+
         for (int m = 0; m < n; m++) {
             System.out.print(a[m]);
         }
 
-        System.out.println();
-        if (exchg == 0) break;
-    
+        System.out.println();    
     }
         
         System.out.printf("비교를 %d회 했습니다.\n", comparison);
