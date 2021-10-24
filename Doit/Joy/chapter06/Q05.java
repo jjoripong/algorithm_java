@@ -45,12 +45,11 @@ public class Q05 {
 
         while (k < n - 1) {
             int last = n - 1;		
-            comparison++; 
-
             switch (d) {
             case Left: 
                 System.out.println("<===");
                 for (int j = n-1; j > k; j--) {
+                    comparison++; 
                     if (a[j-1] > a[j]) {
                         swap(a, j-1, j);
                         swap++;
@@ -61,6 +60,7 @@ public class Q05 {
             case Right: 
                 System.out.println("===>");
                     for (int j = 0; j < n-k-1; j++) { 
+                        comparison++; 
                         if (a[j] > a[j+1]) {
                             swap(a, j, j+1);
                             swap++;
